@@ -1,0 +1,11 @@
+MERN = Mongodb ExpressJs ReactJs NodeJs
+
+User Registration
+With OTP Email Verification
+Product CURD
+Image Upload
+Fliter Function
+Roles
+    Admin
+    User
+Online Payment

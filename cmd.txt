@@ -1,0 +1,6 @@
+npm init -y
+npm i express 
+npm i nodemon -D
+npm run dev             -- server start command 
+npm i dotenv
+npm i mongoose
