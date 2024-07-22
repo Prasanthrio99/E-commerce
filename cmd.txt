@@ -1,6 +1,13 @@
-npm init -y
-npm i express 
-npm i nodemon -D
+npm init -y             --project inital config
+npm i express           --express server lib
+npm i nodemon -D        --automotion server lib
+
+    ---add to package.json file---
+ "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js"
+  }
+  
 npm run dev             -- server start command 
-npm i dotenv
-npm i mongoose
+npm i dotenv            --env file lib
+npm i mongoose          --database Mongodb lib
