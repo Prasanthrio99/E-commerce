@@ -12,7 +12,7 @@ npm run dev             -- server start command
 npm i dotenv            --env file lib
 npm i mongoose          --database Mongodb lib
 npm i bcryptjs          --bcrypt lib (decoder)
-npm i jsonwebtoken      --otp file saving lib
+npm i jsonwebtoken      --json file saving lib
 npm i nodemailer        --email lib 
 
 ----------------structure  design-------------------
