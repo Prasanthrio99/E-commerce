@@ -1,4 +1,4 @@
-import mongoose, { Types } from "mongoose";
+import mongoose from "mongoose";
 
 /* ----user datas-----
         Name
@@ -24,7 +24,7 @@ const schema = new mongoose.Schema({
     },
     role: {
         type: String,
-        default: "user",
+        default: "admin",
     },
     contact: {
         type: String,

@@ -1,19 +1,20 @@
 import { Product } from "../models/Product.js";
 
 
+
 //Add new products
 
 export const createProduct = async (req , res ) => {
     try {
         //wheter check user role
-      
-        if (req.user.role !="admin") {
+        
+        if (req.user.role != "admin") {
             return res.status(403).json({
                 message: "unauthorized person",
            });
         }
 
-        const {title, description, price, stock } = req.body; 
+        const {title, description, category, price, stock } = req.body; 
         const image = req.file;
 
         if (!image) {
@@ -27,9 +28,10 @@ export const createProduct = async (req , res ) => {
         const product = await Product.create({
             title,
             description,
+            category,
             price,
             stock,
-            image:image?.path,
+            image:image.path,
         });
 
         return res.status(201).json({

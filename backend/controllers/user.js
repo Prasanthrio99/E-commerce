@@ -143,7 +143,7 @@ export const loginUser = async(req,res) => {
 
 export const myProfile = async(req,res) => {
     try {
-       const user = await User.findById(req._id).select("-password");
+       const user = await User.findById(req.user).select("-password");
        return res.status(200).json({
         user,
    });  
