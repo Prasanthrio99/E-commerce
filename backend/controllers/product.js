@@ -79,7 +79,7 @@ export const fetchSingleProducts = async (req , res ) => {
 
 //delete products 
 
-export const deleteProduct = async (req , res ) => {
+export const deleteProduct = async (req , res ) => { 
     try {
         //wheter check user role
         
@@ -104,6 +104,39 @@ export const deleteProduct = async (req , res ) => {
             message: "Products Detail Deleted Successfully" ,
        });
     }catch(error){
+        return res.status(500).json({
+            message: error.message,
+       });
+    }
+}
+
+//update stock on products
+
+export const updateStock = async (req , res ) => {
+    try {
+       const product = await Product.findById(req.params.id); 
+       if (req.user.role != "admin") {
+         return res.status(403).json({
+            message: "unauthorized person",
+             });
+         }
+        if (!product) {
+             return res.status(403).json({
+             message: "Product Not Found",
+            });
+        }
+        if (req.body.stock) {
+            product.stock = req.body.stock;
+            await product.save();
+            return res.json({
+                message: "Stock Updated",
+           });
+        }
+        return res.status(400).json({
+            message: "please Enter Your Stock value",
+       });
+
+    } catch (error) {
         return res.status(500).json({
             message: error.message,
        });
