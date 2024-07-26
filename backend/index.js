@@ -13,9 +13,11 @@ app.use(express.json());
 //import routes
 
 import userRoutes from "./routes/user.js"
+import ProductRoutes from "./routes/product.js"
 
 //using routes
 app.use("/api",userRoutes);
+app.use("/api",ProductRoutes);
 
 app.get("/",(req,res)=>{
     res.send("<h1>Hello world</h1>");

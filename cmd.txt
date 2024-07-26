@@ -14,6 +14,8 @@ npm i mongoose          --database Mongodb lib
 npm i bcryptjs          --bcrypt lib (decoder)
 npm i jsonwebtoken      --json file saving lib
 npm i nodemailer        --email lib 
+npm i multer            --pic upload lib
+npm i uuid              --unique id gen lib
 
 ----------------structure  design-------------------
 

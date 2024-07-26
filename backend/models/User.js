@@ -22,7 +22,7 @@ const schema = new mongoose.Schema({
         type: String,
         required: true,
     },
-    name: {
+    role: {
         type: String,
         default: "user",
     },
@@ -32,7 +32,7 @@ const schema = new mongoose.Schema({
     },
 },
 {
-    timestamps: true 
+    timestamps: true, 
 });
 
 export const User = mongoose.model("User",schema);

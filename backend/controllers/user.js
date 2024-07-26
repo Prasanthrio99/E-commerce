@@ -15,7 +15,7 @@ export const registerUser = async(req,res) => {
 
         let user = await User.findOne({ email });
         if (user) {
-            res.status(400).json({
+           return res.status(400).json({
                 message: "User Email Already Exists",
            });
         }
@@ -46,13 +46,13 @@ export const registerUser = async(req,res) => {
         const message = `please verify your account using OTP - your OTP is ${otp}`;
         await sendMail(email,"Welcome our shopping cart zone",message);
 
-        res.status(200).json({
+        return res.status(200).json({
             message: "OTP send your mail pls check",
             activationToken,
        });
 
     } catch (error) {
-       res.status(500).json({
+        return res.status(500).json({
             message: error.message,
        });
     }
@@ -83,13 +83,73 @@ export const verifyUser = async(req,res) => {
             contact:verify.user.contact,
         });
 
-        res.status(200).json({
+        return res.status(200).json({
             message: "User Registration Success",
        });
 
     } catch (error) {
-        res.status(500).json({
+        return res.status(500).json({
             message: error.message,
        });
+    }
+};
+
+//Login user
+
+export const loginUser = async(req,res) => {
+    try {
+        const {email ,password}=req.body;
+
+        //check user email address
+
+        const user = await User.findOne({email});
+
+        if (!user) {
+            return res.status(400).json({
+                message: "Invalid Credentials",
+           });   
+        }
+        //check password
+
+        const matchPassword = await bcrypt.compare(password,user.password);
+
+        if (!matchPassword) {
+            return res.status(400).json({
+                message: "Invalid Credentials",
+           });   
+        }
+
+        //exculde the password feild before sending ---hidden of client side---
+
+        const {password:userPassword,...userDetails} = user.toObject();
+
+        //generate signed token
+
+         const token = jwt.sign({_id:user.id},process.env.JWT_SECRET,{expiresIn:"15d"});
+
+         return res.status(200).json({
+            message: "Welcome " + user.name,
+            token,
+            user:userDetails,
+       }); 
+    } catch (error) {
+        return res.status(500).json({
+            message: error.message,
+       }); 
+    }
+};
+
+//user profile 
+
+export const myProfile = async(req,res) => {
+    try {
+       const user = await User.findById(req._id).select("-password");
+       return res.status(200).json({
+        user,
+   });  
+    } catch (error) {
+        return res.status(500).json({
+            message: error.message,
+       }); 
     }
 };
