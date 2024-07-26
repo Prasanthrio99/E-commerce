@@ -9,6 +9,9 @@ const port = process.env.PORT;
 //middleware 
 app.use(express.json());
 
+//static files
+app.use("/uploads",express.static("uploads"));
+
 
 //import routes
 
